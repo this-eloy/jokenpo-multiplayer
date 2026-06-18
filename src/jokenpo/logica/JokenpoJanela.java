@@ -25,19 +25,19 @@ public class JokenpoJanela extends JFrame implements ActionListener{
         
         jButtonPedra = new JButton(); //cria o botão
         jButtonPedra.setText("Pedra");
-        jButtonPedra.setBounds(250, 180, 240, 30);
+        jButtonPedra.setBounds(100, 400, 240, 30);
         jButtonPedra.addActionListener(this); //adiciona evento ao clicar
         add(jButtonPedra);
         
         jButtonPapel = new JButton(); //cria o botão
         jButtonPapel.setText("Papel");
-        jButtonPapel.setBounds(250, 180, 240, 30);
+        jButtonPapel.setBounds(350, 400, 240, 30);
         jButtonPapel.addActionListener(this); //adiciona evento ao clicar
         add(jButtonPapel);
         
         jButtonTesoura = new JButton(); //cria o botão
         jButtonTesoura.setText("Tesoura");
-        jButtonTesoura.setBounds(250, 180, 240, 30);
+        jButtonTesoura.setBounds(600, 400, 240, 30);
         jButtonTesoura.addActionListener(this); //adiciona evento ao clicar
         add(jButtonTesoura);
     }
