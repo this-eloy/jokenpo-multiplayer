@@ -10,6 +10,7 @@ public class Jokenpo{
     private ObjectOutputStream saida;
     private ObjectInputStream entrada;
     private List<String> jogadas = List.of("Pedra", "Papel", "Tesoura");
+    private String idJogador;
 
     public Jokenpo() throws Exception{
         iniciar();
@@ -18,8 +19,18 @@ public class Jokenpo{
     // inicia com as jogadas zeradas
     public void iniciar() throws Exception{
         socket = new Socket(Config.getIp(), Config.getPorta());
-        entrada = new ObjectInputStream(socket.getInputStream());
+        
         saida = new ObjectOutputStream(socket.getOutputStream());
+        saida.flush();   
+        entrada = new ObjectInputStream(socket.getInputStream());
+        
+        idJogador = (String)entrada.readObject();
+        if(idJogador.startsWith("1")){
+            System.out.println("Conectado! Você é o Jogador 1");
+        }else{
+            System.out.println("Conectado! Você é o Jogador 2");
+        }
+        
     }
      
     public void realizarJogada(String jogada) throws Exception {
@@ -32,6 +43,9 @@ public class Jokenpo{
         // marca jogadas
         saida.writeObject(jogada);
         saida.flush();     
+        
+        String resultado = (String)entrada.readObject();
+        System.out.println(resultado    );
         
     }
     

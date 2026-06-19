@@ -12,23 +12,17 @@ public class Config {
     private Config() {
     }
     
-    private static void readConfig() throws UnknownHostException{
-        
+    private static void readConfig() throws UnknownHostException{   
         ip = InetAddress.getLocalHost().getHostAddress();
-        
     }
 
-    public static String getIp() throws UnknownHostException {
-        
+    public static String getIp() throws UnknownHostException {   
         if(ip == null)readConfig();
         
         return ip;
     }
     
     public static int getPorta() throws UnknownHostException {
-        
-        if(porta == 12345)readConfig();
-        
         return porta;
     }
         
