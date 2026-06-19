@@ -17,7 +17,7 @@ public class Jokenpo{
         jogador2Jogada = null;
     }
      
-    public void realizarJogada(int jogador, String jogada){
+    public synchronized void realizarJogada(int jogador, String jogada) throws InterruptedException {
         // verifica se o jogador é válido
         if(jogador != 1 && jogador != 2){
             throw new GameException("Jogador inválido! Escolha entre 1 ou 2.");
@@ -32,6 +32,13 @@ public class Jokenpo{
         }else{
             jogador2Jogada = jogada;
         }        
+        
+        while( jogador1Jogada == null || jogador2Jogada == null){ // se um estiver jogando
+            System.out.println("Jogador " + jogador + " escolheu. Aguardado escolha do outro jogador.");
+            wait(); // faz a thread parar e esperar
+        }
+        
+        notifyAll(); // aviso
     }
     
     // verifica se os dois jogaram
