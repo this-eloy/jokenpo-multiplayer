@@ -5,13 +5,15 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class JokenpoJanela extends JFrame implements ActionListener{
+public class JokenpoJanela extends JFrame implements ActionListener {
     private JPanel painelPrincipal; //painel principal
     private JButton jButtonPedra;
     private JButton jButtonPapel;
     private JButton jButtonTesoura;
+    private Jokenpo cliente;
     
-    public JokenpoJanela(){
+    public JokenpoJanela() throws Exception{
+        cliente = new Jokenpo();
         
         //JANELA PRINCIPAL
         //setando a janela
@@ -21,7 +23,6 @@ public class JokenpoJanela extends JFrame implements ActionListener{
         setResizable(false); //janela de tamanho fixo
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //quando fechada, encerra o programa           
         setLocationRelativeTo(null); //centraliza
-        setVisible(true); //deixa visível
         
         jButtonPedra = new JButton(); //cria o botão
         jButtonPedra.setText("Pedra");
@@ -40,18 +41,22 @@ public class JokenpoJanela extends JFrame implements ActionListener{
         jButtonTesoura.setBounds(600, 400, 240, 30);
         jButtonTesoura.addActionListener(this); //adiciona evento ao clicar
         add(jButtonTesoura);
+        
+        setVisible(true); //deixa visível
+        
     }
     
     
     @Override
-    public void actionPerformed(ActionEvent ae){
-        //ao clicar em um botão, verifica o nome que foi clicado 
-        if(ae.getActionCommand().equals("Pedra")){
-            //faz a jogada
-        }else if(ae.getActionCommand().equals("Papel")){
-            //faz a jogada
-        }else if(ae.getActionCommand().equals("Tesoura")){
-            //faz a jogada
+    public void actionPerformed(ActionEvent ae) {
+        //ao clicar em um botão, pega a jogada
+        String jogada = ae.getActionCommand();
+        
+        try{
+            cliente.realizarJogada(jogada);
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
     }
+        
 }

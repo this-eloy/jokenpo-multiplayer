@@ -12,12 +12,12 @@ public class ServidorJogo {
     private ServerSocket servidor;
     
     private Socket jogador1;
-    private ObjectOutputStream entradaJogador1;
-    private ObjectInputStream saidaJogador1;
+    private ObjectOutputStream saidaJogador1;
+    private ObjectInputStream entradaJogador1;
             
     private Socket jogador2;
-    private ObjectOutputStream entradaJogador2;
-    private ObjectInputStream saidaJogador2;
+    private ObjectOutputStream saidaJogador2;
+    private ObjectInputStream entradaJogador2;
     
     // iniciar servidor
     public void iniciar() throws Exception {
@@ -34,19 +34,37 @@ public class ServidorJogo {
         jogador1 =  servidor.accept();
         System.out.println( "Conexão Recebida: " + jogador1.toString() + ":" + jogador1.getPort() + "\n" );
         
-        entradaJogador1 = new ObjectOutputStream( jogador1.getOutputStream() );
-        entradaJogador1.flush();        
-        entradaJogador1.writeObject("1;true");
+        saidaJogador1 = new ObjectOutputStream( jogador1.getOutputStream() );
+        entradaJogador1 = new ObjectInputStream( jogador1.getInputStream() );
+        saidaJogador1.flush();        
+        saidaJogador1.writeObject("1;true");
         
         System.out.println( "Esperando por Conexão (Jogador 2)." );
         jogador2 =  servidor.accept();
         System.out.println( "Conexão Recebida: " + jogador2.toString() + ":" + jogador1.getPort() + "\n" );
         
-        entradaJogador2 = new ObjectOutputStream( jogador2.getOutputStream() );
-        entradaJogador2.flush();        
-        entradaJogador2.writeObject("2;true");
+        saidaJogador2 = new ObjectOutputStream( jogador2.getOutputStream() );
+        entradaJogador2 = new ObjectInputStream( jogador2.getInputStream() );
+        saidaJogador2.flush();        
+        saidaJogador2.writeObject("2;true");
         
     }
     
-
+        
+//    public String ganhador(){
+//        if(!jogaram()){
+//            return null;
+//        }
+//        if(jogador1Jogada.equals(jogador2Jogada)){
+//            return "Empate!";
+//        }
+//        if((jogador1Jogada.equals("Pedra") && jogador2Jogada.equals("Tesoura")) ||
+//           (jogador1Jogada.equals("Papel") && jogador2Jogada.equals("Pedra")) ||
+//           (jogador1Jogada.equals("Tesoura") && jogador2Jogada.equals("Papel")) ){
+//            return "Jogador 1 ganhou!";
+//        }else{
+//            return "Jogador 2 ganhou!";
+//        }
+//    }
+    
 }
