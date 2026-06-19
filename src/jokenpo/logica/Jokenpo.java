@@ -45,7 +45,8 @@ public class Jokenpo{
         saida.flush();     
         
         String resultado = (String)entrada.readObject();
-        System.out.println(resultado    );
+        System.out.println(resultado);
+        
         
     }
     

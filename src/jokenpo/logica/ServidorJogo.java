@@ -56,18 +56,34 @@ public class ServidorJogo {
         
     }
     
-    public void jogar() throws Exception{
+    public void jogar(int numeroRodada) throws Exception{
         jogador1Jogada = (String) entradaJogador1.readObject();
         jogador2Jogada = (String) entradaJogador2.readObject();
         
         String resultadoRodada = ganhadorRodada();
         
-        String statusPlacar = "PLACAR: Jogador 1 = " + jogador1Pontos + "|" + "Jogador 2 = " + jogador2Pontos;
+        String statusPlacar = "PLACAR: Jogador 1 Pontos = " + jogador1Pontos + " | " + "Jogador 2 Pontos = " + jogador2Pontos;
         
-        saidaJogador1.writeObject("Resultado da rodada: " + resultadoRodada + statusPlacar );
+        String mensagemFinal = "Rodada " + numeroRodada + ": " + resultadoRodada + "\n" + statusPlacar;
+        
+       
+        if(numeroRodada == 3){
+            String resultadoMD3;
+            if(jogador1Pontos > jogador2Pontos){      
+            resultadoMD3 = "FIM DE JOGO: O Jogador 1 é o Vencedor da MD3";
+            }else if(jogador2Pontos > jogador1Pontos){
+                resultadoMD3 = "FIM DE JOGO: O Jogador 2 é o Vencedor da MD3";
+            }else{
+                resultadoMD3 = "FIM DE JOGO: O Jogo terminou em empate!";
+            }
+            
+            mensagemFinal += "\n" + resultadoMD3;
+        }
+   
+        saidaJogador1.writeObject(mensagemFinal);
         saidaJogador1.flush();
         
-        saidaJogador2.writeObject("Resultado da rodada: " + resultadoRodada + statusPlacar);
+        saidaJogador2.writeObject(mensagemFinal);
         saidaJogador2.flush();
     }
     
@@ -89,24 +105,6 @@ public class ServidorJogo {
             jogador2Pontos++;
             return "Jogador 2 ganhou!";
         }
-    }
-    
-    public void ganhadorMD3() throws Exception{
-        String mensagem;
-        
-        if(jogador1Pontos > jogador2Pontos){
-            mensagem = "FIM DE JOGO: O Jogador 1 é o Vencedor da MD3";
-        }else if(jogador2Pontos > jogador1Pontos){
-            mensagem = "FIM DE JOGO: O Jogador 2 é o Vencedor da MD3";
-        }else{
-            mensagem = "FIM DE JOGO: O Jogo terminou em empate!";
-        }
-        
-        saidaJogador1.writeObject(mensagem);
-        saidaJogador1.flush();
-        
-        saidaJogador2.writeObject(mensagem);
-        saidaJogador2.flush();
     }
     
 }

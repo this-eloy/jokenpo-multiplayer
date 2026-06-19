@@ -52,11 +52,32 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         //ao clicar em um botão, pega a jogada
         String jogada = ae.getActionCommand();
         
-        try{
-            cliente.realizarJogada(jogada);
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
+        // impede que o jogador clique 2 vzs na msm jogada
+        jButtonPedra.setEnabled(false);
+        jButtonPapel.setEnabled(false);
+        jButtonTesoura.setEnabled(false);
+        
+        new Thread(() -> {
+            try{
+                cliente.realizarJogada(jogada);
+                
+                SwingUtilities.invokeLater(()->{
+                    jButtonPedra.setEnabled(true);
+                    jButtonPapel.setEnabled(true);
+                    jButtonTesoura.setEnabled(true);
+                });
+                
+            }catch(Exception ex){
+                ex.printStackTrace();
+                
+                SwingUtilities.invokeLater(()->{
+                    jButtonPedra.setEnabled(true);
+                    jButtonPapel.setEnabled(true);
+                    jButtonTesoura.setEnabled(true);
+                });   
+            }
+        }).start();
+        
     }
         
 }
