@@ -1,6 +1,5 @@
 package jokenpo.logica;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Config {
@@ -8,12 +7,12 @@ public class Config {
     private static String ip;
     private static int porta = 12345;
     
-    // impede a criação de objetos da classe ConfigTXT
+    // impede a criação de objetos da classe Config
     private Config() {
     }
     
     private static void readConfig() throws UnknownHostException{   
-        ip = InetAddress.getLocalHost().getHostAddress();
+        ip = "0.0.0.0";
     }
 
     public static String getIp() throws UnknownHostException {   

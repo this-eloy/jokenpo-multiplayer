@@ -1,5 +1,6 @@
 package jokenpo.logica;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
     private JButton jButtonPapel;
     private JButton jButtonTesoura;
     private Jokenpo cliente;
+    private JLabel jLabelFundo;
     
     public JokenpoJanela() throws Exception{
         cliente = new Jokenpo();
@@ -24,23 +26,61 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //quando fechada, encerra o programa           
         setLocationRelativeTo(null); //centraliza
         
+        ImageIcon icone = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/titulo.png");
+        Image imgRedimensionada = icone.getImage().getScaledInstance(500, 96, Image.SCALE_SMOOTH);
+        ImageIcon iconeFinal = new ImageIcon(imgRedimensionada);
+        JLabel jLabelIcone = new JLabel(iconeFinal);
+        jLabelIcone.setBounds(130, 100, 700, 135);
+        add(jLabelIcone);
+        
+        ImageIcon iconePedra = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/pedra.png");
+        Image imgPedra = iconePedra.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+        ImageIcon pedraBotao = new ImageIcon(imgPedra);
+        
         jButtonPedra = new JButton(); //cria o botão
-        jButtonPedra.setText("Pedra");
-        jButtonPedra.setBounds(100, 400, 240, 30);
+        jButtonPedra.setIcon(pedraBotao); 
+        jButtonPedra.setBounds(350, 261, 240, 51);
         jButtonPedra.addActionListener(this); //adiciona evento ao clicar
+     
+        jButtonPedra.setBorderPainted(false);   
+        jButtonPedra.setContentAreaFilled(false); 
+        jButtonPedra.setFocusPainted(false);     
+        jButtonPedra.setOpaque(false);
         add(jButtonPedra);
         
+        
+        ImageIcon iconePapel = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/papel.png");
+        Image imgPapel = iconePapel.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+        ImageIcon papelBotao = new ImageIcon(imgPapel);
+        
         jButtonPapel = new JButton(); //cria o botão
-        jButtonPapel.setText("Papel");
-        jButtonPapel.setBounds(350, 400, 240, 30);
+        jButtonPapel.setIcon(papelBotao); 
+        jButtonPapel.setBounds(350, 321, 240, 51);
         jButtonPapel.addActionListener(this); //adiciona evento ao clicar
+        jButtonPapel.setBorderPainted(false);   
+        jButtonPapel.setContentAreaFilled(false); 
+        jButtonPapel.setFocusPainted(false);     
         add(jButtonPapel);
         
+        
+        ImageIcon iconeTesoura = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/tesoura.png");
+        Image imgTesoura = iconeTesoura.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+        ImageIcon tesouraBotao = new ImageIcon(imgTesoura);
+        
         jButtonTesoura = new JButton(); //cria o botão
-        jButtonTesoura.setText("Tesoura");
-        jButtonTesoura.setBounds(600, 400, 240, 30);
+        jButtonTesoura.setIcon(tesouraBotao); 
+        jButtonTesoura.setBounds(350, 381, 240, 51);
         jButtonTesoura.addActionListener(this); //adiciona evento ao clicar
+        jButtonTesoura.setBorderPainted(false);   
+        jButtonTesoura.setContentAreaFilled(false); 
+        jButtonTesoura.setFocusPainted(false);     
         add(jButtonTesoura);
+        
+        ImageIcon imagemFundo = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/wallpaper.png");
+        Image imagemRedimensionada = imagemFundo.getImage().getScaledInstance(960, 540, Image.SCALE_SMOOTH);
+        jLabelFundo = new JLabel(new ImageIcon(imagemRedimensionada));
+        jLabelFundo.setBounds(0, 0, 960, 540);
+        add(jLabelFundo);
         
         setVisible(true); //deixa visível
         
