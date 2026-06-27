@@ -37,7 +37,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         Image imgPedra = iconePedra.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
         ImageIcon pedraBotao = new ImageIcon(imgPedra);
         
-        jButtonPedra = new JButton(); //cria o botão
+        jButtonPedra = new JButton("Pedra"); //cria o botão
         jButtonPedra.setIcon(pedraBotao); 
         jButtonPedra.setBounds(350, 261, 240, 51);
         jButtonPedra.addActionListener(this); //adiciona evento ao clicar
@@ -53,7 +53,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         Image imgPapel = iconePapel.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
         ImageIcon papelBotao = new ImageIcon(imgPapel);
         
-        jButtonPapel = new JButton(); //cria o botão
+        jButtonPapel = new JButton("Papel"); //cria o botão
         jButtonPapel.setIcon(papelBotao); 
         jButtonPapel.setBounds(350, 321, 240, 51);
         jButtonPapel.addActionListener(this); //adiciona evento ao clicar
@@ -67,7 +67,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         Image imgTesoura = iconeTesoura.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
         ImageIcon tesouraBotao = new ImageIcon(imgTesoura);
         
-        jButtonTesoura = new JButton(); //cria o botão
+        jButtonTesoura = new JButton("Tesoura"); //cria o botão
         jButtonTesoura.setIcon(tesouraBotao); 
         jButtonTesoura.setBounds(350, 381, 240, 51);
         jButtonTesoura.addActionListener(this); //adiciona evento ao clicar

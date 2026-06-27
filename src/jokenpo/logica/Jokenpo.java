@@ -36,9 +36,9 @@ public class Jokenpo{
     public void realizarJogada(String jogada) throws Exception {
         
         // verifica se o jogador escolheu uma jogada valida
-        if(!jogadas.contains(jogada)){
-            throw new GameException("Movimento inválido! Escolha entre Pedra, Papel ou Tesoura.");
-        }
+//        if(!jogadas.contains(jogada)){
+//            throw new GameException("Movimento inválido! Escolha entre Pedra, Papel ou Tesoura.");
+//        }
         
         // marca jogadas
         saida.writeObject(jogada);

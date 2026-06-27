@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 public class Config {
     
     private static String ip;
-    private static int porta = 12345;
+    private static int porta = 1606;
     
     // impede a criação de objetos da classe Config
     private Config() {
