@@ -26,14 +26,14 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //quando fechada, encerra o programa           
         setLocationRelativeTo(null); //centraliza
         
-        ImageIcon icone = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/titulo.png");
+        ImageIcon icone = new ImageIcon("assets/titulo.png");
         Image imgRedimensionada = icone.getImage().getScaledInstance(500, 96, Image.SCALE_SMOOTH);
         ImageIcon iconeFinal = new ImageIcon(imgRedimensionada);
         JLabel jLabelIcone = new JLabel(iconeFinal);
         jLabelIcone.setBounds(130, 100, 700, 135);
         add(jLabelIcone);
         
-        ImageIcon iconePedra = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/pedra.png");
+        ImageIcon iconePedra = new ImageIcon("assets/pedra.png");
         Image imgPedra = iconePedra.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
         ImageIcon pedraBotao = new ImageIcon(imgPedra);
         
@@ -49,7 +49,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         add(jButtonPedra);
         
         
-        ImageIcon iconePapel = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/papel.png");
+        ImageIcon iconePapel = new ImageIcon("assets/papel.png");
         Image imgPapel = iconePapel.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
         ImageIcon papelBotao = new ImageIcon(imgPapel);
         
@@ -63,7 +63,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         add(jButtonPapel);
         
         
-        ImageIcon iconeTesoura = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/tesoura.png");
+        ImageIcon iconeTesoura = new ImageIcon("assets/tesoura.png");
         Image imgTesoura = iconeTesoura.getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
         ImageIcon tesouraBotao = new ImageIcon(imgTesoura);
         
@@ -76,7 +76,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         jButtonTesoura.setFocusPainted(false);     
         add(jButtonTesoura);
         
-        ImageIcon imagemFundo = new ImageIcon("/mnt/hd1/jokenpo-multiplayer/assets/wallpaper.png");
+        ImageIcon imagemFundo = new ImageIcon("assets/wallpaper.png");
         Image imagemRedimensionada = imagemFundo.getImage().getScaledInstance(960, 540, Image.SCALE_SMOOTH);
         jLabelFundo = new JLabel(new ImageIcon(imagemRedimensionada));
         jLabelFundo.setBounds(0, 0, 960, 540);
