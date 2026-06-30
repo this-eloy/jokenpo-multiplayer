@@ -104,16 +104,16 @@ public class JokenpoJanela extends JFrame implements ActionListener {
                     cliente.realizarJogada("REINICIAR");
                     
                     // volta os botoes originais
-                SwingUtilities.invokeLater( () -> {
-                    jButtonPedra.setText("Pedra");
-                    jButtonPapel.setText("Papel");
-                    jButtonTesoura.setVisible(true);
-                    
-                    // ativa os botoes para as rodadas
-                    jButtonPedra.setEnabled(true);
-                    jButtonPapel.setEnabled(true);
-                    jButtonTesoura.setEnabled(true);
-                });
+                    SwingUtilities.invokeLater( () -> {
+                        jButtonPedra.setText("Pedra");
+                        jButtonPapel.setText("Papel");
+                        jButtonTesoura.setVisible(true);
+
+                        // ativa os botoes para as rodadas
+                        jButtonPedra.setEnabled(true);
+                        jButtonPapel.setEnabled(true);
+                        jButtonTesoura.setEnabled(true);
+                    });
                 
                 // se escolher sair do jogo
                 } else if(jogada.equals("Sair do Jogo")){
