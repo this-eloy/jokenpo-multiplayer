@@ -99,13 +99,51 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         
         new Thread(() -> {
             try{
-                cliente.realizarJogada(jogada);
-                
-                SwingUtilities.invokeLater(()->{
+                // se escolher reiniciar
+                if( jogada.equals("Jogar Novamente")){
+                    cliente.realizarJogada("REINICIAR");
+                    
+                    // volta os botoes originais
+                SwingUtilities.invokeLater( () -> {
+                    jButtonPedra.setText("Pedra");
+                    jButtonPapel.setText("Papel");
+                    jButtonTesoura.setVisible(true);
+                    
+                    // ativa os botoes para as rodadas
                     jButtonPedra.setEnabled(true);
                     jButtonPapel.setEnabled(true);
                     jButtonTesoura.setEnabled(true);
                 });
+                
+                // se escolher sair do jogo
+                } else if(jogada.equals("Sair do Jogo")){
+                    cliente.realizarJogada("Sair");
+                    System.exit(0);
+                    
+                // jogo normal    
+                } else {
+                    
+                    cliente.realizarJogada(jogada);
+                    
+                    // resultado final do jogo
+                    String resultado = cliente.obterResultadoServidor();
+                    
+                    // se for fimde jogo
+                    SwingUtilities.invokeLater(() -> {
+                        if(resultado.contains("FIM DE JOGO")){
+                            jButtonPedra.setText("Jogar Novamente");
+                            jButtonPapel.setText("Sair do Jogo");
+                            jButtonTesoura.setVisible(false); // tira o botao
+                        }
+                        
+                        jButtonPedra.setEnabled(true);
+                        jButtonPapel.setEnabled(true);
+                        if(!resultado.contains("FIM DE JOGO")){
+                            jButtonTesoura.setEnabled(true);
+                        }
+                    
+                });
+                }
                 
             }catch(Exception ex){
                 ex.printStackTrace();

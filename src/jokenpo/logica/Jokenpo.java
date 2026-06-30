@@ -11,6 +11,8 @@ public class Jokenpo{
     private ObjectInputStream entrada;
     private List<String> jogadas = List.of("Pedra", "Papel", "Tesoura");
     private String idJogador;
+    
+    private String ultimoResultado;
 
     public Jokenpo() throws Exception{
         iniciar();
@@ -47,7 +49,11 @@ public class Jokenpo{
         String resultado = (String)entrada.readObject();
         System.out.println(resultado);
         
-        
+        this.ultimoResultado = resultado;
     }
     
+    // pra identificar o final do jogo
+    public String obterResultadoServidor(){
+        return this.ultimoResultado;
+    }
 }
