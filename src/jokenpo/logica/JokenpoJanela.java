@@ -92,7 +92,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
         //ao clicar em um botão, pega a jogada
         String jogada = ae.getActionCommand();
         
-        // impede que o jogador clique 2 vzs na msm jogada
+        // impede que o jogador clique 2 vzs na mesma jogada
         jButtonPedra.setEnabled(false);
         jButtonPapel.setEnabled(false);
         jButtonTesoura.setEnabled(false);

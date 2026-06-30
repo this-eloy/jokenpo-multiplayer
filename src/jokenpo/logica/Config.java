@@ -8,8 +8,7 @@ public class Config {
     private static int porta = 1606;
     
     // impede a criação de objetos da classe Config
-    private Config() {
-    }
+    private Config() {}
     
     private static void readConfig() throws UnknownHostException{   
         ip = "0.0.0.0";

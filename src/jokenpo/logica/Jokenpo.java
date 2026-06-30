@@ -25,6 +25,7 @@ public class Jokenpo{
         entrada = new ObjectInputStream(socket.getInputStream());
         
         idJogador = (String)entrada.readObject();
+        
         if(idJogador.startsWith("1")){
             System.out.println("Conectado! Você é o Jogador 1");
         }else{

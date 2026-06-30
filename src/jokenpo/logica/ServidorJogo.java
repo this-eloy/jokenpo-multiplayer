@@ -71,11 +71,14 @@ public class ServidorJogo {
             String resultadoMD3;
             if(jogador1Pontos > jogador2Pontos){      
             resultadoMD3 = "FIM DE JOGO: O Jogador 1 é o Vencedor da MD3";
-            }else if(jogador2Pontos > jogador1Pontos){
+            }else{ //(jogador2Pontos > jogador1Pontos)
                 resultadoMD3 = "FIM DE JOGO: O Jogador 2 é o Vencedor da MD3";
-            }else{
+            } 
+            
+            //impossível empatar uma md3
+            /*else{
                 resultadoMD3 = "FIM DE JOGO: O Jogo terminou em empate!";
-            }
+            }*/
             
             mensagemFinal += "\n" + resultadoMD3;
         }
