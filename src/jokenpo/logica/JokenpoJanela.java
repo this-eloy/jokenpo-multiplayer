@@ -117,7 +117,7 @@ public class JokenpoJanela extends JFrame implements ActionListener {
                 
                 // se escolher sair do jogo
                 } else if(jogada.equals("Sair do Jogo")){
-                    cliente.realizarJogada("Sair");
+                    cliente.realizarJogada("SAIR");
                     System.exit(0);
                     
                 // jogo normal    
@@ -127,6 +127,9 @@ public class JokenpoJanela extends JFrame implements ActionListener {
                     
                     // resultado final do jogo
                     String resultado = cliente.obterResultadoServidor();
+                    
+                    // TESTE
+                    System.out.println("servidor: " + resultado);
                     
                     // se for fimde jogo
                     SwingUtilities.invokeLater(() -> {

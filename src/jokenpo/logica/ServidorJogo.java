@@ -70,9 +70,9 @@ public class ServidorJogo {
         if(numeroRodada == 3){
             String resultadoMD3;
             if(jogador1Pontos > jogador2Pontos){      
-            resultadoMD3 = "FIM DE JOGO: O Jogador 1 é o Vencedor da MD3";
+            resultadoMD3 = "FIM DE JOGO: O Jogador 1 venceu a MD3";
             }else if(jogador2Pontos > jogador1Pontos){
-                resultadoMD3 = "FIM DE JOGO: O Jogador 2 é o Vencedor da MD3";
+                resultadoMD3 = "FIM DE JOGO: O Jogador 2 venceu a MD3";
             }else{
                 resultadoMD3 = "FIM DE JOGO: O Jogo terminou em empate!";
             }
@@ -105,6 +105,42 @@ public class ServidorJogo {
             jogador2Pontos++;
             return "Jogador 2 ganhou!";
         }
+    }
+    
+    // reiniciar ou sair
+    public boolean processarDecisaoJogadores() throws Exception{
+        System.out.println("Esperando decisão de REINICIAR ou SAIR dos jogadores");        
+        
+        String decisao1 = (String)entradaJogador1.readObject();
+        String decisao2 = (String)entradaJogador2.readObject();
+        
+        System.out.println("Jogador 1 escolheu: " + decisao1);
+        System.out.println("Jogador 2 escolheu: " + decisao2);
+        
+        if(decisao1.equals("REINICIAR") && decisao2.equals("REINICIAR")){
+            
+            this.jogador1Pontos = 0;
+            this.jogador2Pontos = 0;
+            this.jogador1Jogada = null;
+            this.jogador2Jogada = null;
+            
+            System.out.println("Placar reiniciado.");
+            
+            return true;
+        } 
+        
+        if(decisao1.equals("REINICIAR") && decisao2.equals("SAIR")){
+            saidaJogador1.writeObject("FIM DE JOGO, o outro jogador escolheu sair.");
+            saidaJogador1.flush();
+        }
+        
+        if(decisao1.equals("SAIR") && decisao2.equals("REINICIAR")){
+            saidaJogador2.writeObject("FIM DE JOGO, o outro jogador escolheu sair.");
+            saidaJogador2.flush();
+        }
+        
+        // sair
+        return false;
     }
     
 }
