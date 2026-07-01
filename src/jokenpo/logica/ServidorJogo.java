@@ -1,5 +1,10 @@
 package jokenpo.logica;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
@@ -25,8 +30,14 @@ public class ServidorJogo {
     private int jogador1Pontos = 0;
     private int jogador2Pontos = 0;
     
+    private final String relatorio = "relatorio.txt";
+    
+    
     // iniciar servidor
     public void iniciar() throws Exception {
+        //toda vez que se inicia um jogo, limpa o relatório
+        limparRelatorio();
+        
         // usa a classe Config para pegar a porta e ip
         servidor = new ServerSocket( Config.getPorta(), 2, InetAddress.getByName( Config.getIp() ) );
         System.out.println("Servidor Jokenpo Inicializado ( " + servidor + " ).\n");
@@ -62,6 +73,8 @@ public class ServidorJogo {
         
         String resultadoRodada = ganhadorRodada();
         
+        gravaResultadoRodada(numeroRodada, resultadoRodada, jogador1Jogada, jogador2Jogada);
+        
         String statusPlacar = "PLACAR: Jogador 1 Pontos = " + jogador1Pontos + " | " + "Jogador 2 Pontos = " + jogador2Pontos;
         
         String mensagemFinal = "Rodada " + numeroRodada + ": " + resultadoRodada + "\n" + statusPlacar;
@@ -71,16 +84,14 @@ public class ServidorJogo {
             String resultadoMD3;
             if(jogador1Pontos > jogador2Pontos){      
             resultadoMD3 = "FIM DE JOGO: O Jogador 1 é o Vencedor da MD3";
-            }else{ //(jogador2Pontos > jogador1Pontos)
+            }else if(jogador2Pontos > jogador1Pontos){
                 resultadoMD3 = "FIM DE JOGO: O Jogador 2 é o Vencedor da MD3";
-            } 
-            
-            //impossível empatar uma md3
-            /*else{
+            }else{
                 resultadoMD3 = "FIM DE JOGO: O Jogo terminou em empate!";
-            }*/
+            }
             
             mensagemFinal += "\n" + resultadoMD3;
+            mensagemFinal += lerRelatorio();
         }
    
         saidaJogador1.writeObject(mensagemFinal);
@@ -108,6 +119,64 @@ public class ServidorJogo {
             jogador2Pontos++;
             return "Jogador 2 ganhou!";
         }
+    }
+    
+    
+    private void limparRelatorio() {
+        
+        //sobrescreve o arquivo
+        try (FileWriter fw = new FileWriter(relatorio, false)) { //tenta criar um novo ou sobrescrever
+            fw.write(""); 
+        } catch (IOException e) {
+            System.err.println("Erro ao limpar o arquivo de relatório: " + e.getMessage());
+        }
+        
+    }
+    
+    private void gravaResultadoRodada(int rodada, String resultado, String jogada1, String jogada2){
+        
+        try (FileWriter fw = new FileWriter(relatorio, true); BufferedWriter bw = new BufferedWriter(fw)) {
+            
+            bw.write("Rodada " + rodada + ":");
+            bw.newLine();
+            
+            bw.write("Jogada do jogador 1: " + jogada1);
+            bw.newLine();
+            
+            bw.write("Jogada do jogador 2: " + jogada2);
+            bw.newLine();
+            
+            bw.write("Resultado: " + resultado);
+            bw.newLine();
+            
+            bw.write("=====================");
+            bw.newLine();
+            
+        } catch (IOException e) {
+            System.err.println("Erro ao gravar o arquivo de relatório: " + e.getMessage());
+        }
+        
+    }
+    
+    private String lerRelatorio(){
+        
+        StringBuilder textoRelatorio = new StringBuilder(); //string builder para conectar as strings umas às outras
+        textoRelatorio.append("\n == RELATÓRIO DA MD3 == \n");
+        
+        
+        try (BufferedReader br = new BufferedReader(new FileReader("relatorio.txt"))) {
+            
+            String linha;
+            while((linha = br.readLine()) != null){ //percorre e lê todas as linhas do arquivo
+                textoRelatorio.append(linha).append("\n");
+            }
+            
+        } catch (IOException e) {
+            textoRelatorio.append("Erro ao carregar o arquivo de relatório: ").append(e.getMessage());
+        }
+        
+        textoRelatorio.append("================");
+        return textoRelatorio.toString();
     }
     
 }
