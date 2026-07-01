@@ -126,6 +126,11 @@ public class ServidorJogo {
             
             System.out.println("Placar reiniciado.");
             
+            // dps de reinciiar
+            saidaJogador1.writeObject("JOGO REINICIADO");
+            saidaJogador1.flush();
+            saidaJogador2.writeObject("JOGO REINICIADO");
+            saidaJogador2.flush();
             return true;
         } 
         
@@ -143,4 +148,4 @@ public class ServidorJogo {
         return false;
     }
     
-}
+    }

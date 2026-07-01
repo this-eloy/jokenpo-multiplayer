@@ -103,17 +103,41 @@ public class JokenpoJanela extends JFrame implements ActionListener {
                 if( jogada.equals("Jogar Novamente")){
                     cliente.realizarJogada("REINICIAR");
                     
-                    // volta os botoes originais
-                    SwingUtilities.invokeLater( () -> {
-                        jButtonPedra.setText("Pedra");
-                        jButtonPapel.setText("Papel");
-                        jButtonTesoura.setVisible(true);
+                    // pega o resultado do servidor;;
+                    String confirmacao = cliente.obterResultadoServidor();
+                    
+                    if(confirmacao.trim().contains("JOGO REINICIADO")){
+                        
+                        SwingUtilities.invokeLater( () -> {
+                        // volta os botoes originais
+                            Image imgPedra = new ImageIcon("assets/pedra.png").getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+                            Image imgPapel = new ImageIcon("assets/papel.png").getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+                            Image imgTesoura = new ImageIcon("assets/tesoura.png").getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
 
-                        // ativa os botoes para as rodadas
-                        jButtonPedra.setEnabled(true);
-                        jButtonPapel.setEnabled(true);
-                        jButtonTesoura.setEnabled(true);
-                    });
+                            jButtonPedra.setIcon(null);
+                            jButtonPapel.setIcon(null);
+                            jButtonTesoura.setIcon(null);
+                            
+                            jButtonPedra.setIcon(new ImageIcon(imgPedra));
+                            jButtonPapel.setIcon(new ImageIcon(imgPapel));
+                            jButtonTesoura.setIcon(new ImageIcon(imgTesoura));
+
+                            // volta os comandos do jogo
+                            jButtonPedra.setActionCommand("Pedra");
+                            jButtonPapel.setActionCommand("Papel");
+                            jButtonTesoura.setActionCommand("Tesoura");
+
+                            jButtonTesoura.setVisible(true);
+                            jButtonTesoura.setEnabled(true);
+                            
+                            // ativa os botoes para as rodadas
+                            jButtonPedra.setEnabled(true);
+                            jButtonPapel.setEnabled(true);
+                            
+                            
+                            repaint();
+                        });
+                    };
                 
                 // se escolher sair do jogo
                 } else if(jogada.equals("Sair do Jogo")){
@@ -134,18 +158,32 @@ public class JokenpoJanela extends JFrame implements ActionListener {
                     // se for fimde jogo
                     SwingUtilities.invokeLater(() -> {
                         if(resultado.contains("FIM DE JOGO")){
-                            jButtonPedra.setText("Jogar Novamente");
-                            jButtonPapel.setText("Sair do Jogo");
-                            jButtonTesoura.setVisible(false); // tira o botao
+                            try{
+                                Image imgReiniciar = new ImageIcon("assets/reiniciar.png").getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+                                Image imgSair = new ImageIcon("assets/sair.png").getImage().getScaledInstance(240, 51, Image.SCALE_SMOOTH);
+                            
+                                // coloca as imagens de reiniciar e sair por ciam
+                                jButtonPedra.setIcon(new ImageIcon(imgReiniciar));
+                                jButtonPapel.setIcon(new ImageIcon(imgSair));
+                                
+                                jButtonPedra.setActionCommand("Jogar Novamente");
+                                jButtonPapel.setActionCommand("Sair do Jogo");
+                                
+                                jButtonTesoura.setVisible(false); // tira o botao
+                            } catch (Exception e) {
+                                System.out.println("Erro ao acrregar as imagens dos novos botões" + e.getMessage());
+                            }
                         }
                         
                         jButtonPedra.setEnabled(true);
                         jButtonPapel.setEnabled(true);
+                        
                         if(!resultado.contains("FIM DE JOGO")){
                             jButtonTesoura.setEnabled(true);
                         }
-                    
-                });
+                        
+                        getContentPane().repaint();
+                    });
                 }
                 
             }catch(Exception ex){
